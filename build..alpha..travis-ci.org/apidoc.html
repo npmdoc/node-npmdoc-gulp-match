@@ -1,0 +1,187 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/robrich/gulp-match"
+
+    >gulp-match (v1.0.3)</a>
+</h1>
+<h4>Does a vinyl file match a condition?</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-match">module gulp-match</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-match.gulp-match">
+            function <span class="apidocSignatureSpan"></span>gulp-match
+            <span class="apidocSignatureSpan">(file, condition, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-match.toString">
+            function <span class="apidocSignatureSpan">gulp-match.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-match" id="apidoc.module.gulp-match">module gulp-match</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-match.gulp-match" id="apidoc.element.gulp-match.gulp-match">
+        function <span class="apidocSignatureSpan"></span>gulp-match
+        <span class="apidocSignatureSpan">(file, condition, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-match = function (file, condition, options) {
+	if (!file) {
+		throw new Error(&#x27;gulp-match: vinyl file required&#x27;);
+	}
+
+	if (typeof condition === &#x27;boolean&#x27;) {
+		return condition;
+	}
+
+	if (typeof condition === &#x27;function&#x27;) {
+		return !!condition(file);
+	}
+
+	if (typeof condition === &#x27;string&#x27; &#x26;&#x26; condition.match(/^\*\.[a-z\.]+$/)) {
+		var newCond = condition.substring(1).replace(/\./g,&#x27;\\.&#x27;)+&#x27;$&#x27;;
+		condition = new RegExp(newCond);
+	}
+
+	if (typeof condition === &#x27;object&#x27; &#x26;&#x26; typeof condition.test === &#x27;function&#x27; &#x26;&#x26; Object.getPrototypeOf(condition).hasOwnProperty(&#x27;source
+&#x27;)) {
+		// FRAGILE: ASSUME: it&#x27;s a regex
+		return condition.test(file.relative);
+	}
+
+	if (typeof condition === &#x27;string&#x27;) {
+		// FRAGILE: ASSUME: it&#x27;s a minimatch expression
+		return minimatch(file.relative, condition, options);
+	}
+
+	if (Array.isArray(condition)) {
+		// FRAGILE: ASSUME: it&#x27;s a minimatch expression
+		if (!condition.length) {
+			throw new Error(&#x27;gulp-match: empty glob array&#x27;);
+		}
+		var i = 0, step, ret = false;
+		for (i = 0; i &#x3c; condition.length; i++) {
+			step = condition[i];
+			if (step[0] === &#x27;!&#x27;) {
+				if (minimatch(file.relative, step.slice(1), options)) {
+					return false;
+				}
+			} else if (minimatch(file.relative, step, options)) {
+				ret = true;
+			}
+		}
+		return ret;
+	}
+
+	if (typeof condition === &#x27;object&#x27;) {
+		if (condition.hasOwnProperty(&#x27;isFile&#x27;) || condition.hasOwnProperty(&#x27;isDirectory&#x27;)) {
+			if (!file.hasOwnProperty(&#x27;stat&#x27;)) {
+				return false; // TODO: what&#x27;s a better status?
+			}
+			if (condition.hasOwnProperty(&#x27;isFile&#x27;)) {
+				return (condition.isFile === file.stat.isFile());
+			}
+			if (condition.hasOwnProperty(&#x27;isDirectory&#x27;)) {
+				return (condition.isDirectory === file.stat.isDirectory());
+			}
+		}
+	}
+
+	return !!condition;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-match.toString" id="apidoc.element.gulp-match.toString">
+        function <span class="apidocSignatureSpan">gulp-match.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
