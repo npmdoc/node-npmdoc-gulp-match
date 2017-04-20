@@ -1,4 +1,7 @@
-# api documentation for  [gulp-match (v1.0.3)](https://github.com/robrich/gulp-match)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-match.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-match) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-match.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-match)
+# npmdoc-gulp-match
+
+#### api documentation for  [gulp-match (v1.0.3)](https://github.com/robrich/gulp-match)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-match.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-match) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-match.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-match)
+
 #### Does a vinyl file match a condition?
 
 [![NPM](https://nodei.co/npm/gulp-match.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-match)
@@ -18,55 +21,34 @@
 ```json
 
 {
-    "author": {
-        "name": "Rob Richardson",
-        "url": "http://robrich.org/"
-    },
-    "bugs": {
-        "url": "https://github.com/robrich/gulp-match/issues"
-    },
-    "dependencies": {
-        "minimatch": "^3.0.3"
-    },
+    "name": "gulp-match",
     "description": "Does a vinyl file match a condition?",
-    "devDependencies": {
-        "jshint": "^2.9.4",
-        "mocha": "^3.1.2",
-        "should": "^11.1.1"
-    },
-    "directories": {},
-    "dist": {
-        "shasum": "91c7c0d7f29becd6606d57d80a7f8776a87aba8e",
-        "tarball": "https://registry.npmjs.org/gulp-match/-/gulp-match-1.0.3.tgz"
-    },
-    "engines": {
-        "node": ">= 0.10.0"
-    },
-    "gitHead": "45f5f58034da8fe922add183f6726b0f9c2921a1",
+    "version": "1.0.3",
     "homepage": "https://github.com/robrich/gulp-match",
+    "repository": "git://github.com/robrich/gulp-match.git",
+    "author": "Rob Richardson (http://robrich.org/)",
+    "main": "./index.js",
     "keywords": [
         "gulpfriendly",
         "conditional",
         "if",
         "minimatch"
     ],
-    "license": "MIT",
-    "main": "./index.js",
-    "maintainers": [
-        {
-            "name": "robrich"
-        }
-    ],
-    "name": "gulp-match",
-    "optionalDependencies": {},
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/robrich/gulp-match.git"
+    "dependencies": {
+        "minimatch": "^3.0.3"
+    },
+    "devDependencies": {
+        "jshint": "^2.9.4",
+        "mocha": "^3.1.2",
+        "should": "^11.1.1"
     },
     "scripts": {
         "test": "mocha && jshint ."
     },
-    "version": "1.0.3"
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "license": "MIT"
 }
 ```
 
